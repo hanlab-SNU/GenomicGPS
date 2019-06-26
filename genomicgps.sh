@@ -103,11 +103,7 @@ then
 	echo ""
 fi
 
-cd ./scripts/1.DV_Generator
-chmod +x dv_gen.*
-
-
-# Before use Readlink	
+# Before use Readlink
 unameOut="$(uname -s)"	
 case "${unameOut}" in	
         Linux*)         machine=Linux;;	
@@ -131,8 +127,7 @@ case "${unameOut}" in
 			exit 0;;	
 esac	
 
-
- # Relative PATH handling
+# Relative PATH handling
 if [[ ${data1} == /* ]]; then	
 	:	
 else
@@ -168,6 +163,9 @@ else
 	fi
 fi
 
+
+cd ./scripts/1.DV_Generator
+chmod +x dv_gen.*
 
 # First step : Making Distance Vector (1.DV_Generator)
 
