@@ -109,6 +109,28 @@ then
         exit 0
 fi
 
+# Before use Readlink
+unameOut="$(uname -s)"
+case "${unameOut}" in
+        Linux*)         machine=Linux;;
+                        echo "Your PC OS is ${machine}";;
+        Darwin*)        machine=Mac
+                        echo "Your PC OS is ${machine}"
+                        echo "We are downloading the coreutils and gcut for using linux bash command..."
+                        brew install coreutils
+                        ln -s /usr/local/bin/greadlink /usr/local/bin/readlink
+                        ;;
+        CYGWIN*)        machine=Cygwin
+                        echo "Your PC OS is ${machine}. This software is not supported for your system.";;
+        MINGW*)         machine=MinGw
+                        echo "You are using ${machine}. This software is not supported for your system.";;
+        windows*)       machine=Windows
+                        echo "Your PC OS is ${machine}. This software is not supported for your system.";;
+        *)              machine=UNKOWN
+                        echo "UNKNOWN:Your PC OS is not recognized : ${machine}.";;
+esac
+
+
 # Relative path handling
 if [[ ${data1} == /* ]]; then 
 	:
@@ -131,6 +153,7 @@ fi
 # Reference folder Uncompressing
 if [ ! -d "./Reference" ]
 then
+	echo "Reference folder uncompressing..."
 	tar -xzvf Reference.tar.gz
 fi
 
