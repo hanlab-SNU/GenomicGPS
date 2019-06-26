@@ -143,7 +143,7 @@ def dstvct_compare(data1, data2, refmaf, thresh=0):
 
 		print(" Your output is writing...\n")
 		pd.DataFrame(stat_mt).to_csv("{}_{}comp_2data.stat".format(data1.rsplit('.',1)[0],data2.rsplit('/', 1)[1]))
-		pd.DataFrame(pval_mt).to_csv("{}_{}comp_2data.pval".format(data1.rsplit('.',1)[0],data2.rsplit('/', 1)[1]))
+		pd.DataFrame(pval_mt).to_csv("{}_{}comp_2data.pvalue".format(data1.rsplit('.',1)[0],data2.rsplit('/', 1)[1]))
 	else:
 		print(" Number of satellites(K) are different. Please check first before perform the comparision.")
 
