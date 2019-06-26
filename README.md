@@ -11,7 +11,7 @@ Below we briefly describe short instructions for using the software.
 ### Download the packages
 In order to download `GenomicGPS`, you can clone this repository via the commands.
 
-Before use 'git clone' command, please install extension of git called [Git Large File Storage (LFS)](https://github.com/git-lfs/git-lfs/wiki/Installation) before cloning for downloading reference file (>100MB). Since it has many different ways to install the LFS for various OS, please refer [this page](https://github.com/git-lfs/git-lfs/wiki/Installation).
+Before use 'git clone' command, please install extension of git called [Git Large File Storage (LFS)](https://github.com/git-lfs/git-lfs/wiki/Installation) before cloning for reference file (>100MB). Since it has many different ways to install the LFS for various OS, please refer [this page](https://github.com/git-lfs/git-lfs/wiki/Installation).
 
 ```
 $ git clone https://github.com/hanlab-SNU/GenomicGPS.git
