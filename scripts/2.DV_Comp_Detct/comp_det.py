@@ -104,10 +104,10 @@ def dstvct_compare(data1, data2, refmaf, thresh=0):
 				for i in range(B):
 					alt_stat[i] = alt()
 
-				endpoint = min([1-chi2.sf(null_stat[i],k) for i in range(B)])
-				startpoint = min([1-chi2.sf(alt_stat[i],k) for i in range(B)])
+				startpoint = max([-log(1-chi2.sf(null_stat[i],k)) for i in range(B)])
+				endpoint = min([-log(1-chi2.sf(alt_stat[i],k)) for i in range(B)])
 
-				thres = random.uniform(startpoint,endpoint)
+				thres = 10**(-mean(startpoint,endpoint))
 
 				return(thres)
 			start = time. time()
@@ -143,6 +143,7 @@ def dstvct_compare(data1, data2, refmaf, thresh=0):
 
 		print(" Your output is writing...\n")
 		pd.DataFrame(stat_mt).to_csv("{}_{}comp_2data.stat".format(data1.rsplit('.',1)[0],data2.rsplit('/', 1)[1]))
+		pd.DataFrame(pval_mt).to_csv("{}_{}comp_2data.pval".format(data1.rsplit('.',1)[0],data2.rsplit('/', 1)[1]))
 	else:
 		print(" Number of satellites(K) are different. Please check first before perform the comparision.")
 
