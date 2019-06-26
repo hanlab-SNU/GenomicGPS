@@ -80,6 +80,7 @@ fi
 # Reference folder Uncompressing
 if [ ! -d "../../Reference" ]
 then
+	echo "Reference folder uncompressing..."
 	tar -xzvf Reference.tar.gz
 fi
 
@@ -141,7 +142,7 @@ fi
 	rm ${mydata}*.log
 	rm ${mydata}*.nosex
 
-cat ${mydata}.raw | cut -d ' ' --complement -f1-6 | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > ${mydata}.input
+cat ${mydata}.raw | cut -d ' ' -f7- | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > ${mydata}.input
 
 echo ""
 echo " Your input data (.input) is ready for next step!"
