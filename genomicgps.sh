@@ -137,11 +137,7 @@ else
 		echo " We will get the absoulte path for data 1."	
 		data1=`readlink -e -m ${data1}`
 	else # If your OS is Mac OS
-		if [[ ${data1} == ./* ]]; then
-			data1="../.${data1}"
-		else
-			data1="../../${data1}"
-		fi
+		data1="$(cd $(dirname \"${data1}\"); pwd)/$(basename \"${data1}\")"
 	fi
 fi
 
@@ -153,13 +149,9 @@ else
 		echo ""	
 		echo " You put relative path for data 2."	
 		echo " We will get the absoulte path for data 2."	
-		data1=`readlink -e -m ${data1}`
+		data2=`readlink -e -m ${data2}`
 	else # If your OS is Mac OS
-		if [[ ${data2} == ./* ]]; then
-			data2="../.${data2}"
-		else
-			data2="../../${data2}"
-		fi
+		data2="$(cd $(dirname \"${data2}\"); pwd)/$(basename \"${data2}\")"
 	fi
 fi
 
