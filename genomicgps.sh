@@ -106,17 +106,25 @@ fi
 cd ./scripts/1.DV_Generator
 chmod +x dv_gen.*
 
+# PATH change
+## data1
 if [[ ${data1} == /* ]]; then 	
 	:	
-else
+elif [[ ${data1} == ./* ]]; then
 	data1="../.${data1}"
+else
+	data1="../../${data1}"
 fi
 
-if [[ ${data2} == /* ]]; then	
+## data2
+if [[ ${data2} == /* ]]; then 	
 	:	
-else
+elif [[ ${data2} == ./* ]]; then
 	data2="../.${data2}"
+else
+	data2="../../${data2}"
 fi
+
 
 # First step : Making Distance Vector (1.DV_Generator)
 
