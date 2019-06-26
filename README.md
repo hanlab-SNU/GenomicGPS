@@ -24,6 +24,7 @@ format. <br>
 Please ensure the `.bed/.bim/.fam` filesets or `.map/.ped` filesets are all present in the same path. When you implement the code, you should give the path and prefix for the data.
 
 ### Executing the whole code at one go
+If you want to make distance vector only in this time, then check '[Making Distance Vector](https://github.com/hanlab-SNU/GenomicGPS#1-making-distance-vector-1dv_generator-)' part below.
 ```
 $ chmod +x genomicgps.sh
 $ ./genomicgps.sh -n N(#snps) -k K(#satellites) -d1 mydata1 -d2 mydata2
