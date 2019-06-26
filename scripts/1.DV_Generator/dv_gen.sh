@@ -140,12 +140,8 @@ else
 	exit 128
 fi
 
-if [ -f "${mydata}*.log" ]; then
-	rm "${mydata}*.log"
-fi
-if [ -f "${mydata}*.nosex" ]; then
-	rm "${mydata}*.nosex"
-fi
+rm -f "${mydata}*.log"
+rm -f "${mydata}*.nosex"
 
 cat "${mydata}.raw" | cut -d ' ' -f7- | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > "${mydata}.input"
 
