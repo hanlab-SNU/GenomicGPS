@@ -93,7 +93,7 @@ echo " - Your K (# of refrence) : ${K}"
 echo " - Your data path and prefix : ${mydata}"
 
 # If reference & reference p file exist
-if [ ${refdata} ] && [ ${refmaf} ]
+if [ "${refdata}" ] && [ "${refmaf}" ]
 then
     echo "Your reference data is not default."
     echo " - Your reference data path : ${refdata}"
@@ -139,8 +139,13 @@ else
 	echo " Data does not exist. Please check your data path and prefix again."
 	exit 128
 fi
+
+if [ "${mydata}*.log" ]; then
 	rm "${mydata}*.log"
+fi
+if [ "${mydata}*.nosex" ]; then
 	rm "${mydata}*.nosex"
+fi
 
 cat "${mydata}.raw" | cut -d ' ' -f7- | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > "${mydata}.input"
 
