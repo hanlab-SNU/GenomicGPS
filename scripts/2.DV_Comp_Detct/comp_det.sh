@@ -45,10 +45,12 @@ case "$1" in
                 shift
 		;;
         -p)
-                refmaf=$2;shift
+                refmaf=$2
+		shift
                 ;;
         -t)
-                thresh=$2;shift
+                thresh=$2
+		shift
                 ;;
 	\?)
                 echo " WARNING: Unknown option (ignored): %s\n" "$1" >&2
@@ -64,7 +66,7 @@ shift
 done
 
 # If any required element (3 elements) is missing..
-if [ ! ${data1} ] || [ ! ${data2} ] || [ ! ${refmaf} ]
+if [ ! "${data1}" ] || [ ! "${data2}" ] || [ ! "${refmaf}" ]
 then
         echo ""
         echo " Not all required arguments supplied. It requires at least three arguments."
@@ -90,9 +92,9 @@ chmod +x comp_det.py
 if [ ${thresh} ]
 then
 	echo " - Your multiple testing threshold : ${thresh}"
-	./comp_det.py ${data1} ${data2} ${refmaf} ${thresh}
+	./comp_det.py "${data1}" "${data2}" "${refmaf}" ${thresh}
 else
-	./comp_det.py ${data1} ${data2} ${refmaf}
+	./comp_det.py "${data1}" "${data2}" "${refmaf}"
 fi
 
 echo " Finished Duplicate Detection..."
