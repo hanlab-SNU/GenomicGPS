@@ -17,7 +17,7 @@ Currently, `Linux` or `Mac` is required to run `GenomicGPS`.
 ### Downloading the package
 In order to download `GenomicGPS`, you can clone this repository via the commands.
 
-Before use 'git clone' command, please install extension of git called [Git Large File Storage (LFS)](https://github.com/git-lfs/git-lfs/wiki/Installation) for cloning the reference file (>100MB). Since it has many different ways to install LFS for various OS, please refer to [this page](https://github.com/git-lfs/git-lfs/wiki/Installation). Then, type the following to clone our repository.
+Before using 'git clone' command, please install the extension of git called [Git Large File Storage (LFS)](https://github.com/git-lfs/git-lfs/wiki/Installation) for cloning the reference file (>100MB). Since it has many different ways to install LFS for various OS, please refer to [this page](https://github.com/git-lfs/git-lfs/wiki/Installation). Then, type the following to clone our repository.
 
 
 ```
@@ -29,7 +29,7 @@ $ cd GenomicGPS
 ### Installing required dependencies
 Some software packages must be installed.
 
-First, please make sure that [PLINK](http://zzz.bwh.harvard.edu/plink/download.shtml) is installed. The installed plink path should be added to system path. <br>
+First, please make sure that [PLINK](http://zzz.bwh.harvard.edu/plink/download.shtml) is installed. The installed plink path should be added to the system path. <br>
 You can verify by
 
 ```
@@ -74,7 +74,7 @@ The rule of thumb is that we'll need `K>10` references and the SNP/reference rat
 
 
 ### Distance Vector Generation (1.DV_Generator)
-Our first module is for generating distance vector.
+Our first module is for generating a distance vector.
 There are two usages.
 
 #### Usage 1: Data sender
