@@ -114,6 +114,7 @@ unameOut="$(uname -s)"
 case "${unameOut}" in
         Linux*)         machine=Linux
         Darwin*)        machine=Mac
+			echo ""
                         echo "Your PC OS is ${machine}"
                         echo "We are downloading the coreutils and gcut for using linux bash command..."
                         brew install coreutils
@@ -121,15 +122,19 @@ case "${unameOut}" in
 			echo ""
                         ;;
         CYGWIN*)        machine=Cygwin
+			echo ""
                         echo "Your PC OS is ${machine}. This software is not supported for your system."
 			exit 0;;
         MINGW*)         machine=MinGw
+			echo ""
                         echo "You are using ${machine}. This software is not supported for your system."
 			exit 0;;
         windows*)       machine=Windows
+			echo ""
                         echo "Your PC OS is ${machine}. This software is not supported for your system."
 			exit 0;;
         *)              machine=UNKOWN
+			echo ""
                         echo "UNKNOWN:Your PC OS is not recognized : ${machine}."
 			exit 0;;
 esac
