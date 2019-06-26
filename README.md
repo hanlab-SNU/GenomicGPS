@@ -28,7 +28,7 @@ If you want to make distance vector only in this time, then check '[Making Dista
 ```
 $ chmod +x genomicgps.sh
 $ ./genomicgps.sh -n N(#snps) -k K(#satellites) -d1 mydata1 -d2 mydata2
-                   (+ optional parameter : -r refdata(.ref) -p refdata.p(ref.p) -t threshold)
+                   (+ optional parameter : -t threshold)
 ```
 ### Executing the codes by each step
 
