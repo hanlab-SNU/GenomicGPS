@@ -112,7 +112,7 @@ fi
 # Before use Readlink
 unameOut="$(uname -s)"
 case "${unameOut}" in
-        Linux*)         machine=Linux
+        Linux*)         machine=Linux;;
         Darwin*)        machine=Mac
 			echo ""
                         echo "Your PC OS is ${machine}"
