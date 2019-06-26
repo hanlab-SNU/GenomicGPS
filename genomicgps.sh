@@ -22,11 +22,6 @@ Usage: ./${0##*/} [-h] [-n <220|...> ] [-k <11|2504> ] [-d1 FILE_PATH_PREFIX ] [
 	-d1	Your plink file (.bed/.bim/.fam or .map/.ped) : first data path and prefix
 	-d2	Your plink file (.bed/.bim/.fam or .map/.ped) : second data path and prefix
 	
-	(+optional)
-	-r	Reference file (.ref) from the previous result
-	-p	Reference p file (.ref.p) from the previous result
-	-t	Multiple testing threshold p-value
-
 EOF
 }
 
@@ -70,16 +65,6 @@ case "$1" in
 		echo "  -d2 parameter: ${data2}"
 		shift
 		;;
-	-r)
-		REF=$2
-		echo "  -r parameter: ${REF}"
-		shift
-		;;
-	-p)
-		REF_P=$2
-		echo "  -p parameter: ${REF_P}"
-		shift
-		;;
 	-t)
 		THR=$2
 		echo "  -t parameter: ${THR}"
@@ -121,19 +106,22 @@ fi
 cd ./scripts/1.DV_Generator
 chmod +x dv_gen.*
 
-data1="../.${data1}"
-data2="../.${data2}"
+if [[ ${data1} == /* ]]; then 	
+	:	
+else
+	data1="../.${data1}"
+fi
+
+if [[ ${data2} == /* ]]; then	
+	:	
+else
+	data2="../.${data2}"
+fi
 
 # First step : Making Distance Vector (1.DV_Generator)
 
-if [ ! ${REF} ] && [ ! ${REF_P} ]
-then 
-	./dv_gen.sh -n ${N} -k ${K} -d ${data1}
-	./dv_gen.sh -n ${N} -k ${K} -d ${data2} -r ${data1}.ref -p ${data1}.ref.p
-else
-	./dv_gen.sh -n ${N} -k ${K} -d ${data1} -r ${REF} -p ${REF_P}
-	./dv_gen.sh -n ${N} -k ${K} -d ${data2} -r ${REF} -p ${REF_P}
-fi
+./dv_gen.sh -n ${N} -k ${K} -d ${data1}
+./dv_gen.sh -n ${N} -k ${K} -d ${data2} -r ${data1}.ref -p ${data1}.ref.p
 
 cd ../2.DV_Comp_Detct/
 chmod +x comp_det.*
@@ -142,19 +130,9 @@ echo ""
 # Second step : Duplication Detection (2.DV_Comp_Detct)
 if [ ! ${THR} ]
 then
-	if [ ! ${REF} ] && [ ! ${REF_P} ]
-	then
-		./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p
-	else
-		./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${REF_P}
-	fi
+	./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p
 else
-	if [ ! ${REF} ] && [ ! ${REF_P} ]
-	then	
-		./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p -t ${THR}
-	else
-		./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${REF_P} -t ${THR}
-	fi
+	./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p -t ${THR}
 fi
 echo " All steps are finished."
 echo " End time : ${timestamp}"
