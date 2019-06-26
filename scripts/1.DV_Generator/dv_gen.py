@@ -63,7 +63,7 @@ def genom_multilat(n=2000, k=50, urdata="../../sample_data/mydata", refdata="", 
 	print(" - After K x N filtering Reference dimension : {}".format(ref.shape))
 	print(" - After N filtering your data dimension : {}".format(my.shape))
 
-	my.to_csv("{}.gen".format(urdata), sep=" ", header = True, index = False)
+	# my.to_csv("{}.gen".format(urdata), sep=" ", header = True, index = False) # You can get the genotype file from sampled your data
 	
 	# Convert Numpy
 	col_val = list(ref.columns.values)
