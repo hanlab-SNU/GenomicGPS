@@ -140,10 +140,10 @@ else
 	exit 128
 fi
 
-if [ "${mydata}*.log" ]; then
+if [ -f "${mydata}*.log" ]; then
 	rm "${mydata}*.log"
 fi
-if [ "${mydata}*.nosex" ]; then
+if [ -f "${mydata}*.nosex" ]; then
 	rm "${mydata}*.nosex"
 fi
 
@@ -160,7 +160,7 @@ echo " -----------------********--------------------"
 echo " Step 2. Distance Generating"
 echo ""
 
-if [ ${refdata} ] && [ ${refmaf} ]
+if [ -f "${refdata}" ] && [ -f "${refmaf}" ]
 then
 	./dv_gen.py ${N} ${K} "${mydata}" ${refdata} ${refmaf}
 else
