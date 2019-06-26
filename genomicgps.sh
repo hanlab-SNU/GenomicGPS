@@ -106,30 +106,73 @@ fi
 cd ./scripts/1.DV_Generator
 chmod +x dv_gen.*
 
-# PATH change
-## data1
-if [[ ${data1} == /* ]]; then 	
+
+# Before use Readlink	
+unameOut="$(uname -s)"	
+case "${unameOut}" in	
+        Linux*)         machine=Linux;;	
+        Darwin*)        machine=Mac	
+                        ;;	
+        CYGWIN*)        machine=Cygwin	
+			echo ""	
+                        echo "Your PC OS is ${machine}. This software is not supported for your system."	
+			exit 0;;
+        MINGW*)         machine=MinGw	
+			echo ""	
+                        echo "You are using ${machine}. This software is not supported for your system."	
+			exit 0;;
+        windows*)       machine=Windows	
+			echo ""
+                        echo "Your PC OS is ${machine}. This software is not supported for your system."	
+			exit 0;;	
+        *)              machine=UNKOWN	
+			echo ""	
+                        echo "UNKNOWN:Your PC OS is not recognized. This software is not supported for your system."	
+			exit 0;;	
+esac	
+
+
+ # Relative PATH handling
+if [[ ${data1} == /* ]]; then	
 	:	
-elif [[ ${data1} == ./* ]]; then
-	data1="../.${data1}"
 else
-	data1="../../${data1}"
+	if [[ ${machine} == "Linux" ]]; then # If your OS is Linux
+		echo ""	
+		echo " You put relative path for data 1."	
+		echo " We will get the absoulte path for data 1."	
+		data1=`readlink -e -m ${data1}`
+	else # If your OS is Mac OS
+		if [[ ${data1} == ./* ]]; then
+			data1="../.${data1}"
+		else
+			data1="../../${data1}"
+		fi
+	fi
 fi
 
-## data2
-if [[ ${data2} == /* ]]; then 	
+
+if [[ ${data2} == /* ]]; then	
 	:	
-elif [[ ${data2} == ./* ]]; then
-	data2="../.${data2}"
 else
-	data2="../../${data2}"
+	if [[ ${machine} == "Linux" ]]; then # If your OS is Linux
+		echo ""	
+		echo " You put relative path for data 2."	
+		echo " We will get the absoulte path for data 2."	
+		data1=`readlink -e -m ${data1}`
+	else # If your OS is Mac OS
+		if [[ ${data2} == ./* ]]; then
+			data2="../.${data2}"
+		else
+			data2="../../${data2}"
+		fi
+	fi
 fi
 
 
 # First step : Making Distance Vector (1.DV_Generator)
 
-./dv_gen.sh -n ${N} -k ${K} -d ${data1}
-./dv_gen.sh -n ${N} -k ${K} -d ${data2} -r ${data1}.ref -p ${data1}.ref.p
+./dv_gen.sh -n ${N} -k ${K} -d "${data1}"
+./dv_gen.sh -n ${N} -k ${K} -d "${data2}" -r "${data1}".ref -p "${data1}".ref.p
 
 cd ../2.DV_Comp_Detct/
 chmod +x comp_det.*
@@ -138,9 +181,9 @@ echo ""
 # Second step : Duplication Detection (2.DV_Comp_Detct)
 if [ ! ${THR} ]
 then
-	./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p
+	./comp_det.sh -d1 "${data1}.out" -d2 "${data2}.out" -p "${data1}.ref.p"
 else
-	./comp_det.sh -d1 ${data1}.out -d2 ${data2}.out -p ${data1}.ref.p -t ${THR}
+	./comp_det.sh -d1 "${data1}.out" -d2 "${data2}.out" -p "${data1}.ref.p" -t ${THR}
 fi
 echo " All steps are finished."
 echo " End time : ${timestamp}"
