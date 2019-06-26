@@ -7,7 +7,7 @@ Introduction
 
 ![GenomicGPS](github_images/Figure1.png)
 
-We measure the genetic distance to individuals in public data, which we call "distance vector". The software includes modules <ins>(1) to generate distance vectors given genomic data</ins> and <ins>(2) to detect overlapping samples given distance vectors</ins>.
+We measure the genetic distance to individuals in public data, which we call **"distance vector"**. The software includes modules <ins>(1) to generate distance vectors given genomic data</ins> and <ins>(2) to detect overlapping samples given distance vectors</ins>.
 
 Instructions
 -------------
