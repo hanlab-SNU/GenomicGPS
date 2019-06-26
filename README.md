@@ -10,6 +10,9 @@ Below we briefly describe short instructions for using the software.
 
 ### Download the packages
 In order to download `GenomicGPS`, you can clone this repository via the commands.
+
+Before use 'git clone' command, please install extension of git called [Git Large File Storage (LFS)](https://github.com/git-lfs/git-lfs/wiki/Installation) before cloning for download reference file (>100MB). Since it has many different ways to install the LFS for various os, please refer [this page](https://github.com/git-lfs/git-lfs/wiki/Installation).
+
 ```
 $ git clone https://github.com/hanlab-SNU/GenomicGPS.git
 $ cd GenomicGPS
@@ -42,7 +45,7 @@ or
 $ ./dv_gen.sh -n N(#loci) -k K(#satellites) -d mydata2 -r refdata(.ref) -p refdata.p(ref.p)
 ```
 Above mentioned, user can put PLINK filesets as input. Before the examination, user should provide the number of reference SNP loci (N) and number of references (K), also user can optionally provide the reference genotype data and reference allele frequency (`.ref/.ref.p`) from the result of previous implementation. <br>
- - Tips for choosing N and K : We found that at least K > 10 references were needed. Also, the ratio N / K needs to be sufficiently large (>20) for accurate approximations. If you haven't decide it yet, then use N = 1000, K = 20.
+ - **Tips for choosing N and K** : We found that at least K > 10 references were needed. Also, the ratio N / K needs to be sufficiently large (>20) for accurate approximations. If you haven't decide it yet, then use N = 1000, K = 20.
 
 #### 2. Sample Overlap Detection (2.DV_Comp_Detct) :
 ```
@@ -67,7 +70,7 @@ In addition, It is also optional to put the threshold p-value for the multiple t
 This project is licensed under the terms of the MIT license.
 
 ### Dependencies
-Please make sure the software called [PLINK](http://zzz.bwh.harvard.edu/plink/download.shtml) is installed. Also, the installed plink path was added to system path. <br>
+Please make sure the software called [PLINK](http://zzz.bwh.harvard.edu/plink/download.shtml) is installed. Also, the installed plink path should be added to system path. <br>
 You can verify by
 
 ```
@@ -79,19 +82,19 @@ Also, you should install [python3](https://www.python.org/downloads/) and [pip](
 - numpy
 - pandas
 - scipy
-- time
-- [datatable](https://github.com/h2oai/datatable)
+- [datatable](https://github.com/h2oai/datatable#Installation) (It only supports MacOS, linux)
 
 If you are using Python, you can install the required packages with:
 
 ```
-$ pip install -U numpy pandas scipy datatable time
+$ pip install -U numpy pandas scipy datatable
 ```
 
 If you are using Anaconda, you can install the required packages with:
 
 ```
-$ conda install numpy pandas scipy datatable time
+$ conda install -c conda-forge numpy pandas scipy pip
+$ pip install datatable
 ```
 
 ## Citation
