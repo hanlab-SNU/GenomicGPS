@@ -137,7 +137,7 @@ else
 		echo " We will get the absoulte path for data 1."	
 		data1=`readlink -e -m ${data1}`
 	else # If your OS is Mac OS
-		data1="$(cd $(dirname \"${data1}\"); pwd)/$(basename \"${data1}\")"
+		data1="$(cd $(dirname ${data1}); pwd)/$(basename ${data1})"
 	fi
 fi
 
@@ -151,7 +151,7 @@ else
 		echo " We will get the absoulte path for data 2."	
 		data2=`readlink -e -m ${data2}`
 	else # If your OS is Mac OS
-		data2="$(cd $(dirname \"${data2}\"); pwd)/$(basename \"${data2}\")"
+		data2="$(cd $(dirname ${data2}); pwd)/$(basename ${data2})"
 	fi
 fi
 
@@ -162,7 +162,7 @@ chmod +x dv_gen.*
 # First step : Making Distance Vector (1.DV_Generator)
 
 ./dv_gen.sh -n ${N} -k ${K} -d "${data1}"
-./dv_gen.sh -n ${N} -k ${K} -d "${data2}" -r "${data1}".ref -p "${data1}".ref.p
+./dv_gen.sh -n ${N} -k ${K} -d "${data2}" -r "${data1}.ref" -p "${data1}.ref.p"
 
 cd ../2.DV_Comp_Detct/
 chmod +x comp_det.*
