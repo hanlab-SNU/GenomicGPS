@@ -67,7 +67,7 @@ while getopts "hn:k:d:r:p:" opt; do
 done
 
 # If any required element (3 elements) is missing..
-if [ ! ${N} ] || [ ! ${K} ] || [ ! ${mydata} ]
+if [ ! ${N} ] || [ ! ${K} ] || [ ! "${mydata}" ]
 then
         echo ""
         echo " Not all required arguments supplied. It requires at least three arguments."
@@ -121,28 +121,28 @@ echo " -----------------********--------------------"
 echo " Step 1. Parse the data to input data"
 echo ""
 
-if [ -f ${mydata}.ped ]
+if [ -f "${mydata}.ped" ]
 then
 	echo " You have plink regular text file (.map/.ped) for input"
 	echo " ---------------------------------------------"
 	echo ""
-	plink --file ${mydata} --recode A --allow-no-sex --keep-allele-order --out ${mydata}
+	plink --file "${mydata}" --recode A --allow-no-sex --keep-allele-order --out "${mydata}"
 
-elif [ -f ${mydata}.bed ]
+elif [ -f "${mydata}.bed" ]
 then
 	echo " You have plink binary file (.bed/.bim/.fam) for input"
 	echo " ---------------------------------------------"
 	echo ""
-	plink --bfile ${mydata} --recode A --allow-no-sex --keep-allele-order --out ${mydata}
+	plink --bfile "${mydata}" --recode A --allow-no-sex --keep-allele-order --out "${mydata}"
 
 else
 	echo " Data does not exist. Please check your data path and prefix again."
 	exit 128
 fi
-	rm ${mydata}*.log
-	rm ${mydata}*.nosex
+	rm "${mydata}*.log"
+	rm "${mydata}*.nosex"
 
-cat ${mydata}.raw | cut -d ' ' -f7- | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > ${mydata}.input
+cat "${mydata}.raw" | cut -d ' ' -f7- | awk 'NR == 1 {gsub(/\_[a-zA-Z0-9]/,"")}; {print}' > "${mydata}.input"
 
 echo ""
 echo " Your input data (.input) is ready for next step!"
