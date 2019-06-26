@@ -65,7 +65,7 @@ Please ensure that the `.bed/.bim/.fam` filesets or `.map/.ped` filesets are all
 ### Choosing the numbers of SNPs and references
 To run `GenomicGPS`, we need a reference panel from public domain.
 Don't worry, we've already prepared the reference dataset for you;
-`Reference.tar.gz` file contains `1000Genomes Phase 3 data` (2,504 samples and 176,803 pruned SNPs with MAF>5%) formatted for our software.
+`Reference.tar.gz` file contains `1000Genomes Phase 3 data` (2,504 samples and 176,504 pruned SNPs with MAF>5%) formatted for our software.
 The user can specify how many SNPs (`N`) and how many reference individuals (`K`) to use.
 Then, our software will randomly sample `N` SNPs and `K` individuals from our prepared reference dataset
 (which will add a layer of security, because SNP sets and references will be different case by case).
