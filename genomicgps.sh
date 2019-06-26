@@ -112,22 +112,26 @@ fi
 # Before use Readlink
 unameOut="$(uname -s)"
 case "${unameOut}" in
-        Linux*)         machine=Linux;;
-                        echo "Your PC OS is ${machine}";;
+        Linux*)         machine=Linux
         Darwin*)        machine=Mac
                         echo "Your PC OS is ${machine}"
                         echo "We are downloading the coreutils and gcut for using linux bash command..."
                         brew install coreutils
                         ln -s /usr/local/bin/greadlink /usr/local/bin/readlink
+			echo ""
                         ;;
         CYGWIN*)        machine=Cygwin
-                        echo "Your PC OS is ${machine}. This software is not supported for your system.";;
+                        echo "Your PC OS is ${machine}. This software is not supported for your system."
+			exit 0;;
         MINGW*)         machine=MinGw
-                        echo "You are using ${machine}. This software is not supported for your system.";;
+                        echo "You are using ${machine}. This software is not supported for your system."
+			exit 0;;
         windows*)       machine=Windows
-                        echo "Your PC OS is ${machine}. This software is not supported for your system.";;
+                        echo "Your PC OS is ${machine}. This software is not supported for your system."
+			exit 0;;
         *)              machine=UNKOWN
-                        echo "UNKNOWN:Your PC OS is not recognized : ${machine}.";;
+                        echo "UNKNOWN:Your PC OS is not recognized : ${machine}."
+			exit 0;;
 esac
 
 
@@ -153,8 +157,10 @@ fi
 # Reference folder Uncompressing
 if [ ! -d "./Reference" ]
 then
+	echo ""
 	echo "Reference folder uncompressing..."
 	tar -xzvf Reference.tar.gz
+	echo ""
 fi
 
 cd ./scripts/1.DV_Generator
