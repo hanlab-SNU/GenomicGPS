@@ -84,7 +84,7 @@ shift
 done
 
 # If any required element (4 elements) is missing..
-if [ ! ${N} ] || [ ! ${K} ] || [ ! ${data1} ] || [ ! ${data2} ]
+if [ ! ${N} ] || [ ! ${K} ] || [ ! "${data1}" ] || [ ! "${data2}" ]
 then
         echo ""
 	echo " Not all required arguments supplied. It requires at least four arguments."
