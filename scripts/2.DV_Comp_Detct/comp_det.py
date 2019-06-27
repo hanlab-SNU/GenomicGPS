@@ -71,61 +71,52 @@ def dstvct_compare(data1, data2, refmaf, thresh=0):
 			print(" (Default) Threshold determining simulation is processing...")
 			print("           It will take some times...")
 
-			# (Default) Simultation for Multiple Testing Threshold
-			def simul(n, k, B): # n : Nsnp ; k : Nsat ; B : NSimul
-				sat = np.zeros((k, n)) # nrow=Nsat, ncol=Nsnp
-				freq = np.random.uniform(0.05,0.95, n)
-				for i in range(n):
-					sat[:,i] = binom.rvs(2, freq[i], size=k)
-				sigma = np.full((k, k), np.sum((-8*(freq)**4)+(16*(freq)**3)-(12*(freq)**2)+(4*freq)))
-				np.fill_diagonal(sigma, np.sum((24*(freq)**4)-(48*(freq)**3)+(20*(freq)**2)+(4*freq)))
-				sigma_inv = inv(sigma)
+                        # (Default) Simultation for Multiple Testing Threshold
+                        def simul(n, k, B): # n : Nsnp ; k : Nsat ; B : NSimul
+                                sat = np.zeros((k, n)) # nrow=Nsat, ncol=Nsnp
+                                freq = np.random.uniform(0.05,0.95, n)
+                                for i in range(n):
+                                        sat[:,i] = binom.rvs(2, freq[i], size=k)
+                                sigma = np.full((k, k), np.sum((-8*(freq)**4)+(16*(freq)**3)-(12*(freq)**2)+(4*freq)))
+                                np.fill_diagonal(sigma, np.sum((24*(freq)**4)-(48*(freq)**3)+(20*(freq)**2)+(4*freq)))
+                                sigma_inv = inv(sigma)
 
-				null_stat = chi2.rvs(k, size=B)
-				alt_stat = np.zeros(B)
+                                null_stat = chi2.rvs(k, size=B)
+                                alt_stat = np.zeros(B)
 
-				def statfunc(my,sat,sigma_inv):
-					dist_vct1 = np.array([sum(sat[i]-my[0])**2 for i in range(k)])
-					dist_vct2 = np.array([sum(sat[i]-my[1])**2 for i in range(k)])
-					diff = (dist_vct1-dist_vct2)
-					stat = np.dot(np.dot(diff, sigma_inv),diff)
-					return(stat)
+                                def statfunc(my,sat,sigma_inv):
+                                        dist_vct1 = np.array([sum(sat[i]-my[0])**2 for i in range(k)])
+                                        dist_vct2 = np.array([sum(sat[i]-my[1])**2 for i in range(k)])
+                                        diff = (dist_vct1-dist_vct2)
+                                        stat = np.dot(np.dot(diff, sigma_inv),diff)
+                                        return(stat)
 
-				def alt():
-					my = np.zeros((2, n))
-					for i in range(n):
-						my[0,i]=binom.rvs(2, freq[i], size=1)
-						my[1,i]=binom.rvs(2, freq[i], size=1)
-						if np.random.uniform(0,1,1) > 0.01: # Genotyping error
-							my[0,i] = my[1,i]
-					alt_stat = statfunc(my,sat,sigma_inv)
-					return(alt_stat)
+                                def alt():
+                                        my = np.zeros((2, n))
+                                        for i in range(n):
+                                                my[0,i]=binom.rvs(2, freq[i], size=1)
+                                                my[1,i]=binom.rvs(2, freq[i], size=1)
+                                                if np.random.uniform(0,1,1) > 0.01: # Genotyping error
+                                                        my[0,i] = my[1,i]
+                                        alt_stat = statfunc(my,sat,sigma_inv)
+                                        return(alt_stat)
 
-				for i in range(B):
-					alt_stat[i] = alt()
-					
-				# Use Random Sampling from Uniform set from two minimum range for get the threshold...
+                                for i in range(B):
+                                        alt_stat[i] = alt()
 
-				endpoint = min([1-chi2.sf(null_stat[i],k) for i in range(B)])
-				startpoint = min([1-chi2.sf(alt_stat[i],k) for i in range(B)])
+                                endpoint = min([1-chi2.sf(null_stat[i],k) for i in range(B)])
+                                startpoint = min([1-chi2.sf(alt_stat[i],k) for i in range(B)])
 
- 				thres = random.uniform(startpoint,endpoint)
-				
-				# Use mean and -log10pval for get the threshold...
-				
-				#startpoint = np.nanmax(-np.log10(np.array([(1-chi2.sf(null_stat[i],k)) if i!=0 else 1 for i in range(B)])))
-				#endpoint = np.nanmin(-np.log10(np.array([(1-chi2.sf(alt_stat[i],k)) if i!=0 else 1 for i in range(B)])))
+                                thres = random.uniform(startpoint,endpoint)
 
-				#thres = 10**(-np.mean([startpoint,endpoint]))
-
-				return(thres)
-			start = time. time()
-			B = 10000 # You can change the number of simulations	
-			thresh=simul(n,k,B)
-			end = time. time()
-			print(" * Your determined threshold : {}".format(thresh))
-			print(" * Your Simulation for N, K, B, time : {}, {}, {}, {}".format(n, k, B, end-start))
-			print("\n")
+                                return(thres)
+                        start = time. time()
+                        B = 10000 # You can change the number of simulations
+                        thresh=simul(n,k,B)
+                        end = time. time()
+                        print(" * Your determined threshold : {}".format(thresh))
+                        print(" * Your Simulation for N, K, B, time : {}, {}, {}, {}".format(n, k, B, end-start))
+                        print("\n")
 
 		start = time. time()
 		# Generating statistics and p-value
