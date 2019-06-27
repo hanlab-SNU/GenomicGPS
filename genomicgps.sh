@@ -136,8 +136,13 @@ else
 		echo " You put relative path for data 1."	
 		echo " We will get the absoulte path for data 1."	
 		data1=`readlink -e -m ${data1}`
+		echo ""
 	else # If your OS is Mac OS
+		echo ""
+		echo " You put relative path for data 1."
+		echo " We will get the absoulte path for data 1."
 		data1="$(cd $(dirname ${data1}); pwd)/$(basename ${data1})"
+		echo ""
 	fi
 fi
 
@@ -150,8 +155,13 @@ else
 		echo " You put relative path for data 2."	
 		echo " We will get the absoulte path for data 2."	
 		data2=`readlink -e -m ${data2}`
+		echo ""
 	else # If your OS is Mac OS
+		echo ""
+		echo " You put relative path for data 2."
+		echo " We will get the absoulte path for data 2."
 		data2="$(cd $(dirname ${data2}); pwd)/$(basename ${data2})"
+		echo ""
 	fi
 fi
 
