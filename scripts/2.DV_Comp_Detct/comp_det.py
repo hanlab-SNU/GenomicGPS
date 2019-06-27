@@ -104,10 +104,10 @@ def dstvct_compare(data1, data2, refmaf, thresh=0):
 				for i in range(B):
 					alt_stat[i] = alt()
 
-				startpoint = np.nanmax(-np.log10(np.array([(1-chi2.sf(null_stat[i],k)) for i in range(B)])))
-				endpoint = np.nanmin(-np.log10(np.array([(1-chi2.sf(alt_stat[i],k)) for i in range(B)])))
+				startpoint = np.nanmax(-np.log10(np.array([(1-chi2.sf(null_stat[i],k)) if i!=0 else 1 for i in range(B)])))
+				endpoint = np.nanmin(-np.log10(np.array([(1-chi2.sf(alt_stat[i],k)) if i!=0 else 1 for i in range(B)])))
 
-				thres = 10**(-mean(startpoint,endpoint))
+				thres = 10**(-np.mean([startpoint,endpoint]))
 
 				return(thres)
 			start = time. time()
