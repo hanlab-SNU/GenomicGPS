@@ -158,7 +158,7 @@ echo ""
 
 if [ -f "${refdata}" ] && [ -f "${refmaf}" ]
 then
-	./dv_gen.py ${N} ${K} "${mydata}" ${refdata} ${refmaf}
+	./dv_gen.py ${N} ${K} "${mydata}" "${refdata}" "${refmaf}"
 else
 	./dv_gen.py ${N} ${K} "${mydata}"
 fi
