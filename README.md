@@ -167,7 +167,7 @@ This project is licensed under the terms of the MIT license.
 
 Citation
 ----------
-If you use the software `genomicGPS`, please cite [Kim et al. Genomic GPS: using genetic distance for genomic analysis without disclosing personal genome. (under review) (2019)](www.)
+If you use the software `genomicGPS`, please cite [Kim et al. Genomic GPS: using genetic distance from individuals to public data for genomic analysis without disclosing personal genomes. (under review) (2019)](www.)
 
 Reference
 ------------
