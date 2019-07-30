@@ -1,5 +1,6 @@
 GenomicGPS `v1.0`
 ===================
+[![DOI](https://zenodo.org/badge/187569547.svg)](https://zenodo.org/badge/latestdoi/187569547)
 
 Introduction
 ------------
@@ -172,6 +173,7 @@ Reference
 ------------
 1. [PLINK v1.9](www.cog-genomics.org/plink/2.0/) | Chang CC, Chow CC, Tellier LCAM, Vattikuti S, Purcell SM, Lee JJ Second-generation PLINK: rising to the challenge of larger and richer datasets. GigaScience, 4. (2015) doi:10.1186/s13742-015-0047-8
 2. [1000 Genome Phase 3 data](https://www.cog-genomics.org/plink/2.0/resources) | A global reference for human genetic variation, The 1000 Genomes Project Consortium, Nature 526, 68-74 (2015) doi:10.1038/nature15393
+
 
 Support
 ----------
